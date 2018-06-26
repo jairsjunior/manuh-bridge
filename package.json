@@ -1,0 +1,22 @@
+{
+  "name": "manuh-bridge",
+  "version": "0.0.1",
+  "description": "Bridge between manuh and mqtt",
+  "main": "src/manuh-bridge.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "mqtt",
+    "manuh",
+    "bridge"
+  ],
+  "author": "Jair de Souza Junior",
+  "license": "MIT",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "manuh": "^1.3.0",
+    "mosca": "^2.8.2",
+    "mqtt": "^2.18.1"
+  }
+}
