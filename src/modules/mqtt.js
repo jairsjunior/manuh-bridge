@@ -14,9 +14,10 @@ class MqttClient {
     }
 
     connect() {
-        info(`==> Connecting to ${this.config.protocol}://${this.config.host}:${this.config.port} (client ID ${this.config.clientId})`);
+        info(`==> Connecting to ${this.config.protocol}://${this.config.host}:${this.config.port}/${this.config.context || ""} (client ID ${this.config.clientId})`);
 
-        var client = this.client  = mqtt.connect(this.config);
+        const urlConnect = `${this.config.protocol}://${this.config.host}:${this.config.port}/${this.config.context || ""}`;
+        var client = this.client  = mqtt.connect(urlConnect);
 
         client.on('connect', () => {
             info('Connected ==> ');
