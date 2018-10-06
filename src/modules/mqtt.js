@@ -1,9 +1,9 @@
-const mqtt = require('mqtt');
-const manuhLocal = require('manuh');
-const debug = require('debug')('debug');
-const info = require('debug')('mqttClient');
+var mqtt = require('mqtt');
+var manuhLocal = require('manuh');
+var debug = require('debug')('debug');
+var info = require('debug')('mqttClient');
 
-class MqttClient {
+class _MqttClient {
 
     constructor(config){
         this.config = config;
@@ -16,7 +16,7 @@ class MqttClient {
     connect() {
         info(`==> Connecting to ${this.config.protocol}://${this.config.host}:${this.config.port}/${this.config.context || ""} (client ID ${this.config.clientId})`);
 
-        const urlConnect = `${this.config.protocol}://${this.config.host}:${this.config.port}/${this.config.context || ""}`;
+        var urlConnect = `${this.config.protocol}://${this.config.host}:${this.config.port}/${this.config.context || ""}`;
         var client = this.client  = mqtt.connect(urlConnect);
 
         client.on('connect', () => {
@@ -46,7 +46,7 @@ class MqttClient {
             this.id++;
             info(`Message ${this.id} '${topic}'`, message.toString());
 
-            const msg = { topic: topic, message: message.toString() };
+            var msg = { topic: topic, message: message.toString() };
             manuhLocal.publish('__message/mqtt/manuh', msg, { retained: false } );
         });
     }
@@ -70,4 +70,4 @@ class MqttClient {
 
 }
 
-exports.MqttClient = MqttClient;
+exports._MqttClient = _MqttClient;

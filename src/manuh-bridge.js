@@ -1,9 +1,9 @@
-const manuhLocal = require('manuh');
-const MqttClient = require("./modules/mqtt.js").MqttClient;
-const ManuhClient = require("./modules/manuh.js").ManuhClient;
+var manuhLocal = require('manuh');
+var MqttClient = require("./modules/mqtt.js")._MqttClient;
+var ManuhClient = require("./modules/manuh.js")._ManuhClient;
 
-let __manuhClient = undefined;
-let __mqttClient = undefined;
+var __manuhClient;
+var __mqttClient;
 
 class ManuhBridge {
 
@@ -24,20 +24,20 @@ class ManuhBridge {
     }
 
     subscribeBridge(topics){
-        for(let index in topics){
+        for(var index in topics){
             __mqttClient.subscribe(topics[index]);
             __manuhClient.subscribe(topics[index]);
         }
     }
 
     subscribeRemote2LocalTopics(topics){
-        for(let index in topics){
+        for(var index in topics){
             __mqttClient.subscribe(topics[index]);
         }
     }
 
     subscribeLocal2RemoteTopics(topics){
-        for(let index in topics){
+        for(var index in topics){
             __manuhClient.subscribe(topics[index]);
         }
     }

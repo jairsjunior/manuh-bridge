@@ -1,10 +1,11 @@
 {
   "name": "manuh-bridge-mqtt",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "description": "Bridge between manuh and mqtt",
-  "main": "src/manuh-bridge.js",
+  "main": "dist/manuh-bridge.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "dist": "gulp dist"
   },
   "keywords": [
     "mqtt",
@@ -19,6 +20,15 @@
     "mqtt": "^2.18.1"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0",
+    "jshint": "^2.9.5",
     "mosca": "^2.8.2"
   }
 }
