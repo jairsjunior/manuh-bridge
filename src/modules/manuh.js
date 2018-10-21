@@ -1,5 +1,4 @@
 const manuhLocal = require('manuh');
-const debug = require('debug')('debug');
 const info = require('debug')('manuhClient');
 
 class ManuhClient {
