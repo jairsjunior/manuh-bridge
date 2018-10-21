@@ -1,4 +1,5 @@
 const manuhLocal = require('manuh');
+const info = require('debug')('ManuhBridge');
 const MqttClient = require("./modules/mqtt.js").MqttClient;
 const ManuhClient = require("./modules/manuh.js").ManuhClient;
 
@@ -7,7 +8,7 @@ let __mqttClient = undefined;
 
 class ManuhBridge {
 
-    constructor(manuh, mqttConfig){
+    constructor(manuh, mqttConfig, connectionsCompleted){
         __manuhClient = new ManuhClient(manuh);
         __mqttClient = new MqttClient(mqttConfig);
 
@@ -19,8 +20,11 @@ class ManuhBridge {
             __manuhClient.publish(msg.topic, msg.message);
         });
 
-        __manuhClient.connect();
-        __mqttClient.connect();
+        __mqttClient.connect(() => {
+            __manuhClient.connect();
+            info("Connections Completed. Bridge ready to receive pub/sub.")
+            connectionsCompleted()
+        });
     }
 
     subscribeBridge(topics){
