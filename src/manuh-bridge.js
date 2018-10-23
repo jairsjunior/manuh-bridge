@@ -10,7 +10,6 @@ class ManuhBridge {
         this.__mqttClient = new MqttClient(mqttConfig);
 
         const _self = this
-
         manuhLocal.subscribe('__message/manuh/mqtt', 'id', function(msg, info){
             _self.__mqttClient.publish(msg.topic, msg.message);
         });

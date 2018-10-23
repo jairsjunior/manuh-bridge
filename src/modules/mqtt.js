@@ -17,7 +17,7 @@ class MqttClient {
     connect(ready) {
         info(`Connection config: `, this.config)
         
-        const brokerURL = `${this.config.protocol}://${this.config.host}:${this.config.port}/${this.config.context}`
+        const brokerURL = `${this.config.protocol}://${this.config.host}${this.config.port ? ":"+this.config.port : ""}/${this.config.context}`
         info(`==> Connecting to ${brokerURL} (client ID ${this.config.clientId})`);
         var client = this.client  = mqtt.connect(brokerURL);
 
