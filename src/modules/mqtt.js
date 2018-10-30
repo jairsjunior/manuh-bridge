@@ -1,9 +1,9 @@
-const mqtt = require('mqtt');
-const manuhLocal = require('manuh');
-const debug = require('debug')('debug');
-const info = require('debug')('mqttClient');
+var mqtt = require('mqtt');
+var manuhLocal = require('manuh');
+var debug = require('debug')('debug');
+var info = require('debug')('mqttClient');
 
-class MqttClient {
+class _MqttClient {
 
     constructor(config){
         this.config = config;
@@ -56,7 +56,7 @@ class MqttClient {
             this.id++;
             info(`Message ${this.id} '${topic}'`, message.toString());
 
-            const msg = { topic: topic, message: message.toString() };
+            var msg = { topic: topic, message: message.toString() };
             manuhLocal.publish('__message/mqtt/manuh', msg, { retained: false } );
         });
     }
@@ -77,8 +77,6 @@ class MqttClient {
         }
     }
 
-    
-
 }
 
-exports.MqttClient = MqttClient;
+exports._MqttClient = _MqttClient;

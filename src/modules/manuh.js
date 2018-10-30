@@ -1,7 +1,7 @@
 const manuhLocal = require('manuh');
 const info = require('debug')('manuhClient');
 
-class ManuhClient {
+class _ManuhClient {
 
     constructor(manuh){
         this.manuh = manuh;
@@ -40,4 +40,4 @@ class ManuhClient {
 
 }
 
-exports.ManuhClient = ManuhClient;
+exports._ManuhClient = _ManuhClient;
