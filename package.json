@@ -1,6 +1,6 @@
 {
-  "name": "manuh-bridge-mqtt",
-  "version": "0.0.6",
+  "name": "manuh-bridge",
+  "version": "0.0.2",
   "description": "Bridge between manuh and mqtt",
   "main": "dist/manuh-bridge.js",
   "scripts": {

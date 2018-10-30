@@ -1,6 +1,5 @@
-var manuhLocal = require('manuh');
-var debug = require('debug')('debug');
-var info = require('debug')('manuhClient');
+const manuhLocal = require('manuh');
+const info = require('debug')('manuhClient');
 
 class _ManuhClient {
 

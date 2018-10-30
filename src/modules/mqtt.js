@@ -8,26 +8,36 @@ class _MqttClient {
     constructor(config){
         this.config = config;
         this.topics = [];
+        this.subscriptions = [];
         this.connected = false;
         this.config.clientId = 'mqtt2manuh_' + Math.random().toString(16).substr(2, 8);
         this.id = 0;
     }
 
-    connect() {
-        info(`==> Connecting to ${this.config.protocol}://${this.config.host}:${this.config.port}/${this.config.context || ""} (client ID ${this.config.clientId})`);
-
-        var urlConnect = `${this.config.protocol}://${this.config.host}:${this.config.port}/${this.config.context || ""}`;
-        var client = this.client  = mqtt.connect(urlConnect);
+    connect(ready) {
+        info(`Connection config: `, this.config)
+        
+        const brokerURL = `${this.config.protocol}://${this.config.host}${this.config.port ? ":"+this.config.port : ""}/${this.config.context}`
+        info(`==> Connecting to ${brokerURL} (client ID ${this.config.clientId})`);
+        var client = this.client  = mqtt.connect(brokerURL);
 
         client.on('connect', () => {
-            info('Connected ==> ');
-        
-            this.topics.forEach(t => {
-                info(`Subscribe to ${t}`);
-                client.subscribe(t);
-            });
 
-            this.connected = true; 
+            debug("Connected. Now subscribing to topics")
+            this.topics.forEach(t => {
+                if (this.subscriptions.indexOf(t) !== -1) { //prevent duplication overhead
+                    debug(`Topic ${t} already subscribed. Ignoring...`)
+                }
+                info(`Subscribe to ${t}`)
+                client.subscribe(t)
+                this.subscriptions.push(t)
+            });
+            if (!this.connected) {
+                this.connected = true; 
+                info('Connected ==> ');
+                return ready()
+            }
+            return info('Connected ==> ');
         });
         
         client.on('reconnect', (e) => {
@@ -61,12 +71,11 @@ class _MqttClient {
 
     subscribe(topic) {
         this.topics.push(topic);
-        if (this.connected) {
+        if (!!this.connected) {
             this.client.subscribe(topic);
+            this.subscriptions.push(topic)
         }
     }
-
-    
 
 }
 
