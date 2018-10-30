@@ -4,7 +4,7 @@
   "description": "Bridge between manuh and mqtt",
   "main": "dist/manuh-bridge.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --exit",
     "dist": "gulp dist"
   },
   "keywords": [

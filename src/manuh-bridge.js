@@ -1,7 +1,7 @@
 const manuhLocal = require('manuh');
 const info = require('debug')('ManuhBridge');
-const MqttClient = require("./modules/mqtt.js").MqttClient;
-const ManuhClient = require("./modules/manuh.js").ManuhClient;
+const MqttClient = require("./modules/mqtt.js")._MqttClient;
+const ManuhClient = require("./modules/manuh.js")._ManuhClient;
 
 class ManuhBridge {
 
